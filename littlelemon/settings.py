@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'reservation',
     'restaurant',
 ]
 
@@ -77,8 +76,19 @@ WSGI_APPLICATION = 'littlelemon.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # Specifies that MySQL is being used as the database engine
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'littlelemon',  # The name of your database
+        'USER': 'root',  # The username for connecting to the database
+        'PASSWORD': 'new_password',  # The password for the database user
+        # The database server's address (127.0.0.1 is localhost)
+        'HOST': '127.0.0.1',
+        # The port on which MySQL is running (3306 is the default for MySQL)
+        'PORT': '3306',
+        'OPTIONS': {
+            # MySQL-specific options, here setting SQL mode
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
