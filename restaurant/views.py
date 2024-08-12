@@ -7,8 +7,17 @@ from .serializers import bookingSerializer, menuSerializer
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
+
+
+@api_view()
+@permission_classes([IsAuthenticated])
+# @authentication_classes([TokenAuthentication])
+def msg(request):
+    return Response({"message": "This view is protected"})
 
 
 def index(request):
@@ -34,6 +43,7 @@ class menuview(APIView):
 
 
 class MenuItemView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Menu.objects.all()
     serializer_class = menuSerializer
 
